@@ -4,8 +4,13 @@ import Header from "./components/Header/Header";
 import Products from "./components/Products/Products";
 
 // const categories = products.map(p => p.category).filter((value, index, array) => array.indexOf(value)===index);
-
 const App = () => {
+  const [category, setCategory] = useState("All Jackets");
+
+  const changedSelectionHandler = (selectItem) => {
+    setCategory(selectItem);
+  };
+
   const ProductArr = [
     {
       id: 1,
@@ -274,20 +279,20 @@ const App = () => {
       },
     },
   ];
-  const [category, setCategory] = useState(ProductArr);
 
-  const changedSelectionHandler = (selectItem) => {
-    setCategory(
-      selectItem.toString() === "All Jackets"
-        ? ProductArr
-        : ProductArr.filter((items) => items.category === selectItem)
-    );
-  };
+  let selectedItemes;
+  if (category.toString() === "All Jackets") {
+    selectedItemes = ProductArr;
+  } else {
+    selectedItemes = ProductArr.filter((items) => {
+      return items.category === category;
+    });
+  }
 
   return (
     <React.Fragment>
       <Header selected={category} onChangeSelection={changedSelectionHandler} />
-      <Products ProductsArr={category} />
+      <Products ProductsArr={selectedItemes} />
     </React.Fragment>
   );
 };

@@ -22,9 +22,9 @@
     margin-bottom: 20px;
   }
 
-  .product-filter {
+  /* .product-filter {
     flex-direction: column;
-  }
+  } */
 
   .sort {
     align-self: flex-start;
